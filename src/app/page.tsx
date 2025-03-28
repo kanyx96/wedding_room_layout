@@ -1,103 +1,209 @@
-import Image from "next/image";
+import { Horizontal_Table, Verticle_Table } from "@/coponents/table";
+import styles from "./styles.module.css";
+import { Typography } from "@mui/material";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className={styles.base_container}>
+      <div
+        style={{
+          height: "80%",
+          aspectRatio: "1 / 0.75",
+          borderColor: "gray",
+          borderWidth: "2px",
+          display: "flex",
+          flexDirection: "row",
+        }}
+      >
+        {/* left side of the room */}
+        <div
+          style={{
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-around",
+            paddingTop: "3%",
+          }}
+        >
+          <div
+            style={{
+              height: "15.6%",
+              aspectRatio: "1 / 0.5",
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <Horizontal_Table size={14} identifier="A" />
+          </div>
+          <div
+            style={{
+              height: "15.6%",
+              aspectRatio: "1 / 0.5",
+            }}
           >
-            Read our docs
-          </a>
+            <Horizontal_Table size={14} identifier="B" />
+          </div>
+          <div
+            style={{
+              height: "15.6%",
+              aspectRatio: "1 / 0.5",
+            }}
+          >
+            <Horizontal_Table size={14} identifier="C" />
+          </div>
+          <div
+            style={{
+              height: "15.6%",
+              aspectRatio: "1 / 0.5",
+            }}
+          >
+            <Horizontal_Table size={14} identifier="D" />
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+
+        {/* middle of room */}
+        <div
+          style={{
+            marginLeft: "5.37%",
+            marginRight: " 5.37%",
+            width: "40.18%",
+            height: "100%",
+          }}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          {/* stage */}
+          <div
+            style={{
+              height: "15.6%",
+              aspectRatio: "2.5 / 1",
+              borderColor: "gray",
+              borderWidth: "2px",
+              alignContent: "center",
+              justifyItems: "center",
+              justifySelf: "center",
+            }}
+          >
+            <Typography variant="body1">Stage</Typography>
+          </div>
+
+          {/* open area and seats to left and right */}
+          <div
+            style={{
+              height: "48.3%",
+              width: "100%",
+              marginTop: "7.81%",
+              marginBottom: "9%",
+              display: "flex",
+              flexDirection: "row",
+              // justifyContent: "space-between",
+            }}
+          >
+            {/* left side seats of open area */}
+            <div style={{ width: "30%" }}>
+              <div
+                style={{
+                  height: "41.7%",
+                  aspectRatio: "0.85 / 1.29",
+                  marginBottom: "20%",
+                }}
+              >
+                <Verticle_Table size={10} identifier="E" />
+              </div>
+              <div
+                style={{
+                  height: "41.7%",
+                  aspectRatio: "0.85 / 1.29",
+                }}
+              >
+                <Verticle_Table size={10} identifier="F" />
+              </div>
+            </div>
+            {/* open area */}
+            <div
+              style={{
+                width: "50%",
+                aspectRatio: "1.4 / 2.36",
+                borderColor: "gray",
+                borderWidth: "2px",
+                marginTop: "12.94%",
+                marginLeft: "2.5%",
+                marginRight: "2.5%",
+              }}
+            />
+            {/* right side seats of open area */}
+            <div style={{ width: "30%" }}>
+              <div
+                style={{
+                  height: "41.7%",
+                  aspectRatio: "0.85 / 1.29",
+                  marginBottom: "20%",
+                }}
+              >
+                <Verticle_Table size={10} identifier="G" />
+              </div>
+              <div
+                style={{
+                  height: "41.7%",
+                  aspectRatio: "0.85 / 1.29",
+                }}
+              >
+                <Verticle_Table size={10} identifier="H" />
+              </div>
+            </div>
+          </div>
+          {/* bottom middle tables */}
+          <div
+            style={{
+              height: "13.28%",
+              aspectRatio: "3 / 0.85",
+              justifySelf: "center",
+            }}
+          >
+            <Horizontal_Table size={24} identifier="J" />
+          </div>
+        </div>
+
+        {/* right side of the room */}
+        <div
+          style={{
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-around",
+            paddingTop: "3%",
+          }}
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <div
+            style={{
+              height: "15.6%",
+              aspectRatio: "1 / 0.5",
+            }}
+          >
+            <Horizontal_Table size={14} identifier="K" />
+          </div>
+          <div
+            style={{
+              height: "15.6%",
+              aspectRatio: "1 / 0.5",
+            }}
+          >
+            <Horizontal_Table size={14} identifier="L" />
+          </div>
+          <div
+            style={{
+              height: "15.6%",
+              aspectRatio: "1 / 0.5",
+            }}
+          >
+            <Horizontal_Table size={14} identifier="M" />
+          </div>
+          <div
+            style={{
+              height: "15.6%",
+              aspectRatio: "1 / 0.5",
+            }}
+          >
+            <Horizontal_Table size={14} identifier="N" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
