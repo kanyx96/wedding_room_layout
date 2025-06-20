@@ -145,6 +145,7 @@ export function Verticle_Table({
       >
         {arr.slice(arr.length / 2, arr.length).map((value, index) => (
           <Box
+            key={index}
             sx={{
               width: "100%",
               aspectRatio: "1 / 1",
