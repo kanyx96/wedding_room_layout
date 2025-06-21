@@ -1,6 +1,6 @@
 // src/app/api/guest/fetch_details/route.ts
 import { supabase } from '@/lib/supabaseClient';
-import { Guest } from '@/models/guest_model';
+// import { Guest } from '@/models/guest_model';
 import { NextResponse } from 'next/server';
 
 // export async function GET(request: Request) {
