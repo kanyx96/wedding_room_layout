@@ -17,17 +17,17 @@ import { Guest } from "@/models/guest_model";
 const Guest_Form = ({
   seat_id,
   onChangeSeat,
-  onUpdateDetails,
+  // onUpdateDetails,
 }: {
   seat_id: string;
   onChangeSeat?: () => void;
-  onUpdateDetails?: (data: {
-    guest_name: string;
-    food_choice: string;
-    food_allergies: string;
-    association: "bride" | "groom";
-    association_grouping: string;
-  }) => void;
+  // onUpdateDetails?: (data: {
+  //   guest_name: string;
+  //   food_choice: string;
+  //   food_allergies: string;
+  //   association: "bride" | "groom";
+  //   association_grouping: string;
+  // }) => void;
 }) => {
   const [guest, setGuest] = useState<Guest | null>(null);
   const [error, setError] = useState<string | null>(null);
