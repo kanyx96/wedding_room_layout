@@ -1,4 +1,3 @@
-// pages/api/guests/edit.ts
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { supabase } from '@/lib/supabaseClient'
 
