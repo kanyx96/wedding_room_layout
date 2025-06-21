@@ -15,7 +15,7 @@ export default function Home() {
     >
       <div className={styles.base_container}>
         <Room_Schematic />
-        <Guest_Form />
+        {seat_selected ? <Guest_Form seat_id={seat_selected} /> : null}
       </div>
     </seat_selected_context.Provider>
   );
