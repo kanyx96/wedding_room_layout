@@ -34,7 +34,7 @@ const Guest_Form = ({
 
   useEffect(() => {
     const fetchGuest = async () => {
-      const res = await fetch("/api/guests?seat_id=" + seat_id);
+      const res = await fetch(`/api/guests/fetch_details?seat_id=${seat_id}`);
       const data = await res.json();
 
       if (!res.ok) {
