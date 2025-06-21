@@ -4,6 +4,7 @@ import { useContext } from "react";
 import styles from "./table_styles.module.css";
 import { Box, Grid, Typography } from "@mui/material";
 import { seat_selected_context } from "@/contexts/seat_selection_contexts";
+import { table_selected_context } from "@/contexts/table_selection_contexts";
 
 export function Horizontal_Table({
   size,
@@ -16,6 +17,10 @@ export function Horizontal_Table({
     seat_selected_context
   );
 
+  const { table_selected, set_table_selected } = useContext(
+    table_selected_context
+  );
+
   const arr = [...Array(size).keys()];
   return (
     <Grid container className={styles.base_container}>
@@ -24,8 +29,8 @@ export function Horizontal_Table({
         <Grid
           size={(12 / size) * 2}
           key={index}
-          alignContent="center"
-          justifyItems="center"
+          alignContent='center'
+          justifyItems='center'
           sx={{ height: "25%" }}
         >
           <Box
@@ -39,7 +44,10 @@ export function Horizontal_Table({
               backgroundColor:
                 seat_selected === identifier + (value + 1) ? "red" : null,
             }}
-            onClick={() => set_seat_selected(identifier + (value + 1))}
+            onClick={() => {
+              set_seat_selected(identifier + (value + 1));
+              set_table_selected(null);
+            }}
           />
         </Grid>
       ))}
@@ -48,10 +56,11 @@ export function Horizontal_Table({
       <Grid
         size={12}
         sx={{ height: "50%" }}
-        alignContent="center"
-        justifyItems="center"
+        alignContent='center'
+        justifyItems='center'
       >
         <Box
+          className={styles.table}
           sx={{
             height: "80%",
             width: "95%",
@@ -59,9 +68,15 @@ export function Horizontal_Table({
             borderColor: "gray",
             alignContent: "center",
             justifyItems: "center",
+            backgroundColor:
+                table_selected === identifier ? "red" : null,
+          }}
+          onClick={() => {
+            set_table_selected(identifier);
+            set_seat_selected(null)
           }}
         >
-          <Typography variant="body1" sx={{ fontSize: "50%" }}>
+          <Typography variant='body1' sx={{ fontSize: "50%" }}>
             {identifier}
           </Typography>
         </Box>
@@ -72,8 +87,8 @@ export function Horizontal_Table({
         <Grid
           size={(12 / size) * 2}
           key={index}
-          alignContent="center"
-          justifyItems="center"
+          alignContent='center'
+          justifyItems='center'
           sx={{ height: "25%" }}
         >
           <Box
@@ -87,7 +102,10 @@ export function Horizontal_Table({
               backgroundColor:
                 seat_selected === identifier + (value + 1) ? "red" : null,
             }}
-            onClick={() => set_seat_selected(identifier + (value + 1))}
+            onClick={() => {
+              set_seat_selected(identifier + (value + 1));
+              set_table_selected(null);
+            }}
           />
         </Grid>
       ))}
@@ -104,6 +122,10 @@ export function Verticle_Table({
 }) {
   const { seat_selected, set_seat_selected } = useContext(
     seat_selected_context
+  );
+
+  const { table_selected, set_table_selected } = useContext(
+    table_selected_context
   );
 
   const arr = [...Array(size).keys()];
@@ -132,7 +154,10 @@ export function Verticle_Table({
               backgroundColor:
                 seat_selected === identifier + (value + 1) ? "red" : null,
             }}
-            onClick={() => set_seat_selected(identifier + (value + 1))}
+            onClick={() => {
+              set_seat_selected(identifier + (value + 1));
+              set_table_selected(null);
+            }}
           />
         ))}
       </div>
@@ -142,6 +167,7 @@ export function Verticle_Table({
         style={{ width: "50%", alignContent: "center", justifyItems: "center" }}
       >
         <Box
+          className={styles.table}
           sx={{
             height: "95%",
             width: "80%",
@@ -149,9 +175,15 @@ export function Verticle_Table({
             borderColor: "gray",
             alignContent: "center",
             justifyItems: "center",
+            backgroundColor:
+                table_selected === identifier ? "red" : null,
+          }}
+          onClick={() => {
+            set_table_selected(identifier);
+            set_seat_selected(null)
           }}
         >
-          <Typography variant="body1" sx={{ fontSize: "50%" }}>
+          <Typography variant='body1' sx={{ fontSize: "50%" }}>
             {identifier}
           </Typography>
         </Box>
@@ -180,7 +212,10 @@ export function Verticle_Table({
               backgroundColor:
                 seat_selected === identifier + (value + 1) ? "red" : null,
             }}
-            onClick={() => set_seat_selected(identifier + (value + 1))}
+            onClick={() => {
+              set_seat_selected(identifier + (value + 1));
+              set_table_selected(null);
+            }}
           />
         ))}
       </div>

@@ -10,6 +10,10 @@
   flex-direction: row;
 }
 
+.table:hover {
+  cursor: pointer;
+}
+
 .chair:hover {
     cursor: pointer;
 }

@@ -10,31 +10,22 @@ import {
   Button,
   Box,
   Typography,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { seat_selected_context } from "@/contexts/seat_selection_contexts";
 import { Guest } from "@/models/guest_model";
+import { update_guest } from "./functions/update_guest_function";
 
-const Guest_Form = ({
-  seat_id,
-  onChangeSeat,
-  // onUpdateDetails,
-}: {
-  seat_id: string;
-  onChangeSeat?: () => void;
-  // onUpdateDetails?: (data: {
-  //   guest_name: string;
-  //   food_choice: string;
-  //   food_allergies: string;
-  //   association: "bride" | "groom";
-  //   association_grouping: string;
-  // }) => void;
-}) => {
+const Guest_Form = ({ seat_id }: { seat_id: string }) => {
   const [guest, setGuest] = useState<Guest | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchGuest = async () => {
-      const res = await fetch(`/api/guests/fetch_details?seat_id=${seat_id}`);
+      const res = await fetch(
+        `/api/guests/fetch_guest_details?seat_id=${seat_id}`
+      );
       const data = await res.json();
 
       if (!res.ok) {
@@ -46,25 +37,67 @@ const Guest_Form = ({
     };
 
     fetchGuest();
-  }, [seat_id]);
+    setGuestName(guest?.guest_name);
+    setFoodChoice(guest?.food_choice);
+    setallergies(guest?.allergies);
+    setAssociation(guest?.association);
+    setAssociationGrouping(guest?.association_grouping);
+  }, [
+    guest?.allergies,
+    guest?.association,
+    guest?.association_grouping,
+    guest?.food_choice,
+    guest?.guest_name,
+    seat_id,
+  ]);
 
-  const [guestName, setGuestName] = useState(guest?.guest_name);
-  const [foodChoice, setFoodChoice] = useState(guest?.food_choice);
-  const [foodAllergies, setFoodAllergies] = useState(guest?.food_allergies);
-  const [association, setAssociation] = useState(guest?.association);
-  const [associationGrouping, setAssociationGrouping] = useState(
-    guest?.association_grouping
+  const clearAllFields = () => {
+    setGuestName(null);
+    setFoodChoice(null);
+    setallergies(null);
+    setAssociation(null);
+    setAssociationGrouping(null);
+  };
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState<"success" | "error">(
+    "success"
   );
 
-  const handleUpdate = () => {
-    // onUpdateDetails?.({
-    //   guest_name: guestName,
-    //   food_choice: foodChoice,
-    //   food_allergies: foodAllergies,
-    //   association,
-    //   association_grouping: associationGrouping,
-    // });
+  const handleUpdateGuest = async () => {
+    try {
+      await update_guest(
+        seat_id,
+        guestName,
+        foodChoice,
+        allergies,
+        association,
+        associationGrouping
+      );
+      setSnackbarSeverity("success");
+      setSnackbarMessage("Guest information updated successfully!");
+      setSnackbarOpen(true);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setSnackbarMessage(error.message);
+      } else {
+        setSnackbarMessage("An unknown error occurred.");
+      }
+      setSnackbarSeverity("error");
+      setSnackbarOpen(true);
+    }
   };
+
+  const [guestName, setGuestName] = useState<string | null | undefined>(null);
+  const [foodChoice, setFoodChoice] = useState<string | null | undefined>(null);
+  const [allergies, setallergies] = useState<string | null | undefined>(null);
+  const [association, setAssociation] = useState<string | null | undefined>(
+    null
+  );
+  const [associationGrouping, setAssociationGrouping] = useState<
+    string | null | undefined
+  >(null);
 
   const { seat_selected } = useContext(seat_selected_context);
 
@@ -74,7 +107,7 @@ const Guest_Form = ({
   return (
     <Box
       sx={{
-        width: "50%",
+        width: "100%",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -82,6 +115,20 @@ const Guest_Form = ({
         boxSizing: "border-box",
       }}
     >
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={4000}
+        onClose={() => setSnackbarOpen(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+      >
+        <Alert
+          onClose={() => setSnackbarOpen(false)}
+          severity={snackbarSeverity}
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
       <Grid
         container
         spacing={1}
@@ -97,7 +144,7 @@ const Guest_Form = ({
           <TextField
             fullWidth
             label='Guest Name'
-            value={guestName}
+            value={guestName ?? ""}
             onChange={(e) => setGuestName(e.target.value)}
             slotProps={{
               inputLabel: { sx: { fontSize: 12 } },
@@ -110,7 +157,7 @@ const Guest_Form = ({
           <FormControl fullWidth size='small'>
             <InputLabel sx={{ fontSize: 12 }}>Food Choice</InputLabel>
             <Select
-              value={foodChoice}
+              value={foodChoice ?? ""}
               label='Food Choice'
               onChange={(e) => setFoodChoice(e.target.value)}
               slotProps={{
@@ -127,8 +174,8 @@ const Guest_Form = ({
           <TextField
             fullWidth
             label='Food Allergies'
-            value={foodAllergies}
-            onChange={(e) => setFoodAllergies(e.target.value)}
+            value={allergies ?? ""}
+            onChange={(e) => setallergies(e.target.value)}
             slotProps={{
               inputLabel: { sx: { fontSize: 12 } },
               input: { sx: { fontSize: 10 } },
@@ -140,7 +187,7 @@ const Guest_Form = ({
           <FormControl fullWidth size='small'>
             <InputLabel sx={{ fontSize: 12 }}>Association</InputLabel>
             <Select
-              value={association}
+              value={association ?? ""}
               label='Association'
               onChange={(e) =>
                 setAssociation(e.target.value as "bride" | "groom")
@@ -159,7 +206,7 @@ const Guest_Form = ({
           <TextField
             fullWidth
             label='Association Grouping'
-            value={associationGrouping}
+            value={associationGrouping ?? ""}
             onChange={(e) => setAssociationGrouping(e.target.value)}
             slotProps={{
               inputLabel: { sx: { fontSize: 12 } },
@@ -173,18 +220,18 @@ const Guest_Form = ({
             <Button
               variant='outlined'
               fullWidth
-              onClick={onChangeSeat}
+              onClick={clearAllFields}
               size='small'
               sx={{ fontSize: 10, py: 1 }}
             >
-              Change Guest&apos;s Seat
+              Clear guest details
             </Button>
           </Grid>
           <Grid size={6}>
             <Button
               variant='contained'
               fullWidth
-              onClick={handleUpdate}
+              onClick={handleUpdateGuest}
               size='small'
               sx={{ fontSize: 10, py: 1 }}
             >
