@@ -38,7 +38,7 @@ export default function Room_Schematic() {
               aspectRatio: "1 / 0.5",
             }}
           >
-            <Horizontal_Table size={14} identifier="B" />
+            <Horizontal_Table size={12} identifier="B" />
           </div>
           <div
             style={{
@@ -46,7 +46,7 @@ export default function Room_Schematic() {
               aspectRatio: "1 / 0.5",
             }}
           >
-            <Horizontal_Table size={14} identifier="C" />
+            <Horizontal_Table size={12} identifier="C" />
           </div>
           <div
             style={{
@@ -155,7 +155,7 @@ export default function Room_Schematic() {
               justifySelf: "center",
             }}
           >
-            <Horizontal_Table size={24} identifier="J" />
+            <Horizontal_Table size={22} identifier="J" />
           </div>
         </div>
 
@@ -183,7 +183,7 @@ export default function Room_Schematic() {
               aspectRatio: "1 / 0.5",
             }}
           >
-            <Horizontal_Table size={14} identifier="L" />
+            <Horizontal_Table size={12} identifier="L" />
           </div>
           <div
             style={{
@@ -191,7 +191,7 @@ export default function Room_Schematic() {
               aspectRatio: "1 / 0.5",
             }}
           >
-            <Horizontal_Table size={14} identifier="M" />
+            <Horizontal_Table size={12} identifier="M" />
           </div>
           <div
             style={{
