@@ -29,8 +29,8 @@ export function Horizontal_Table({
         <Grid
           size={(12 / size) * 2}
           key={index}
-          alignContent='center'
-          justifyItems='center'
+          alignContent="center"
+          justifyItems="center"
           sx={{ height: "25%" }}
         >
           <Box
@@ -48,7 +48,11 @@ export function Horizontal_Table({
               set_seat_selected(identifier + (value + 1));
               set_table_selected(null);
             }}
-          />
+          >
+            <Typography variant="body1" sx={{ fontSize: "20%" }}>
+              {index + 1}
+            </Typography>
+          </Box>
         </Grid>
       ))}
 
@@ -56,8 +60,8 @@ export function Horizontal_Table({
       <Grid
         size={12}
         sx={{ height: "50%" }}
-        alignContent='center'
-        justifyItems='center'
+        alignContent="center"
+        justifyItems="center"
       >
         <Box
           className={styles.table}
@@ -68,15 +72,14 @@ export function Horizontal_Table({
             borderColor: "gray",
             alignContent: "center",
             justifyItems: "center",
-            backgroundColor:
-                table_selected === identifier ? "red" : null,
+            backgroundColor: table_selected === identifier ? "red" : null,
           }}
           onClick={() => {
             set_table_selected(identifier);
-            set_seat_selected(null)
+            set_seat_selected(null);
           }}
         >
-          <Typography variant='body1' sx={{ fontSize: "50%" }}>
+          <Typography variant="body1" sx={{ fontSize: "50%" }}>
             {identifier}
           </Typography>
         </Box>
@@ -87,8 +90,8 @@ export function Horizontal_Table({
         <Grid
           size={(12 / size) * 2}
           key={index}
-          alignContent='center'
-          justifyItems='center'
+          alignContent="center"
+          justifyItems="center"
           sx={{ height: "25%" }}
         >
           <Box
@@ -106,7 +109,11 @@ export function Horizontal_Table({
               set_seat_selected(identifier + (value + 1));
               set_table_selected(null);
             }}
-          />
+          >
+            <Typography variant="body1" sx={{ fontSize: "20%" }}>
+              {index + 1}
+            </Typography>
+          </Box>
         </Grid>
       ))}
     </Grid>
@@ -158,7 +165,11 @@ export function Verticle_Table({
               set_seat_selected(identifier + (value + 1));
               set_table_selected(null);
             }}
-          />
+          >
+            <Typography variant="body1" sx={{ fontSize: "20%" }}>
+              {index + 1}
+            </Typography>
+          </Box>
         ))}
       </div>
 
@@ -175,15 +186,14 @@ export function Verticle_Table({
             borderColor: "gray",
             alignContent: "center",
             justifyItems: "center",
-            backgroundColor:
-                table_selected === identifier ? "red" : null,
+            backgroundColor: table_selected === identifier ? "red" : null,
           }}
           onClick={() => {
             set_table_selected(identifier);
-            set_seat_selected(null)
+            set_seat_selected(null);
           }}
         >
-          <Typography variant='body1' sx={{ fontSize: "50%" }}>
+          <Typography variant="body1" sx={{ fontSize: "50%" }}>
             {identifier}
           </Typography>
         </Box>
@@ -216,7 +226,11 @@ export function Verticle_Table({
               set_seat_selected(identifier + (value + 1));
               set_table_selected(null);
             }}
-          />
+          >
+            <Typography variant="body1" sx={{ fontSize: "20%" }}>
+              {index + 1}
+            </Typography>
+          </Box>
         ))}
       </div>
     </div>
