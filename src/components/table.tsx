@@ -41,6 +41,8 @@ export function Horizontal_Table({
               borderRadius: "50%",
               borderWidth: 2,
               borderColor: "gray",
+              alignContent: "center",
+              justifyItems: "center",
               backgroundColor:
                 seat_selected === identifier + (value + 1) ? "red" : null,
             }}
@@ -49,8 +51,8 @@ export function Horizontal_Table({
               set_table_selected(null);
             }}
           >
-            <Typography variant="body1" sx={{ fontSize: "20%" }}>
-              {index + 1}
+            <Typography variant="body1" sx={{ fontSize: "50%" }}>
+              {value + 1}
             </Typography>
           </Box>
         </Grid>
@@ -102,6 +104,8 @@ export function Horizontal_Table({
               borderRadius: "50%",
               borderWidth: 2,
               borderColor: "gray",
+              alignContent: "center",
+              justifyItems: "center",
               backgroundColor:
                 seat_selected === identifier + (value + 1) ? "red" : null,
             }}
@@ -110,8 +114,8 @@ export function Horizontal_Table({
               set_table_selected(null);
             }}
           >
-            <Typography variant="body1" sx={{ fontSize: "20%" }}>
-              {index + 1}
+            <Typography variant="body1" sx={{ fontSize: "50%" }}>
+              {value + 1}
             </Typography>
           </Box>
         </Grid>
@@ -158,6 +162,8 @@ export function Verticle_Table({
               borderRadius: "50%",
               borderWidth: 2,
               borderColor: "gray",
+              alignContent: "center",
+              justifyItems: "center",
               backgroundColor:
                 seat_selected === identifier + (value + 1) ? "red" : null,
             }}
@@ -166,8 +172,8 @@ export function Verticle_Table({
               set_table_selected(null);
             }}
           >
-            <Typography variant="body1" sx={{ fontSize: "20%" }}>
-              {index + 1}
+            <Typography variant="body1" sx={{ fontSize: "50%" }}>
+              {value + 1}
             </Typography>
           </Box>
         ))}
@@ -219,6 +225,8 @@ export function Verticle_Table({
               borderRadius: "50%",
               borderWidth: 2,
               borderColor: "gray",
+              alignContent: "center",
+              justifyItems: "center",
               backgroundColor:
                 seat_selected === identifier + (value + 1) ? "red" : null,
             }}
@@ -227,8 +235,8 @@ export function Verticle_Table({
               set_table_selected(null);
             }}
           >
-            <Typography variant="body1" sx={{ fontSize: "20%" }}>
-              {index + 1}
+            <Typography variant="body1" sx={{ fontSize: "50%" }}>
+              {value + 1}
             </Typography>
           </Box>
         ))}
