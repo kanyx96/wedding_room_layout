@@ -1,5 +1,12 @@
 import { Guest } from "@/models/guest_model";
-import { Box, List, ListItem } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  List,
+  ListItem,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 
 const Table_Guest_List = ({ table_selected }: { table_selected: string }) => {
@@ -9,7 +16,7 @@ const Table_Guest_List = ({ table_selected }: { table_selected: string }) => {
   useEffect(() => {
     const fetchGuest = async () => {
       const res = await fetch(
-        `/api/fetch_table_details?table=${table_selected}`
+        `/api/table/fetch_table_details?table=${table_selected}`
       );
       const data = await res.json();
 
@@ -24,26 +31,44 @@ const Table_Guest_List = ({ table_selected }: { table_selected: string }) => {
     fetchGuest();
   }, [table_selected]);
 
-  if (error) return <div>Error: {error}</div>;
-  if (!guests) return <div>Loading...</div>;
+  if (error)
+    return (
+      <Typography variant="h6" sx={{ paddingLeft: 3 }}>
+        Error: {error}
+      </Typography>
+    );
+  if (!guests)
+    return <CircularProgress sx={{ paddingLeft: 3, margin: "auto" }} />;
 
   return (
     <Box
       sx={{
         width: "100%",
+        height: "80vh",
         display: "flex",
         justifyContent: "flex-start",
-        alignItems: "center",
-        p: 3,
+        alignItems: "flex-start",
         boxSizing: "border-box",
+        overflow: "auto",
+        paddingLeft: 3,
       }}
     >
-      <List>
+      <List sx={{ width: "100%" }}>
         {guests.map((value, index) => (
-          <ListItem key={index} disableGutters sx={{ fontSize: 12 }}>
-            {value.seat_id}
-            {": "}
-            {value.guest_name}
+          <ListItem key={index} sx={{ fontSize: 16, width: "100%" }}>
+            <Typography
+              sx={{
+                minWidth: "4ch",
+                textAlign: "right",
+              }}
+            >
+              {value.seat_id + ":"}
+            </Typography>
+            <TextField
+              sx={{ marginLeft: "10px" }}
+              fullWidth
+              value={value.guest_name ?? ""}
+            />
           </ListItem>
         ))}
       </List>

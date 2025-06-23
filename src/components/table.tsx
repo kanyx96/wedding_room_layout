@@ -9,9 +9,11 @@ import { table_selected_context } from "@/contexts/table_selection_contexts";
 export function Horizontal_Table({
   size,
   identifier,
+  filled_seats,
 }: {
   size: number;
   identifier: string;
+  filled_seats: { seat_id: string }[];
 }) {
   const { seat_selected, set_seat_selected } = useContext(
     seat_selected_context
@@ -44,7 +46,11 @@ export function Horizontal_Table({
               alignContent: "center",
               justifyItems: "center",
               backgroundColor:
-                seat_selected === identifier + (value + 1) ? "red" : null,
+                seat_selected === identifier + (value + 1)
+                  ? "red"
+                  : filled_seats.some(seat => seat.seat_id === identifier + (value + 1))
+                  ? "lightgreen"
+                  : null,
             }}
             onClick={() => {
               set_seat_selected(identifier + (value + 1));
@@ -107,7 +113,11 @@ export function Horizontal_Table({
               alignContent: "center",
               justifyItems: "center",
               backgroundColor:
-                seat_selected === identifier + (value + 1) ? "red" : null,
+                seat_selected === identifier + (value + 1)
+                  ? "red"
+                  : filled_seats.some(seat => seat.seat_id === identifier + (value + 1))
+                  ? "lightgreen"
+                  : null,
             }}
             onClick={() => {
               set_seat_selected(identifier + (value + 1));
@@ -127,9 +137,11 @@ export function Horizontal_Table({
 export function Verticle_Table({
   size,
   identifier,
+  filled_seats
 }: {
   size: number;
   identifier: string;
+  filled_seats: {seat_id: string}[]
 }) {
   const { seat_selected, set_seat_selected } = useContext(
     seat_selected_context
@@ -165,7 +177,11 @@ export function Verticle_Table({
               alignContent: "center",
               justifyItems: "center",
               backgroundColor:
-                seat_selected === identifier + (value + 1) ? "red" : null,
+                seat_selected === identifier + (value + 1)
+                  ? "red"
+                  : filled_seats.some(seat => seat.seat_id === identifier + (value + 1))
+                  ? "lightgreen"
+                  : null,
             }}
             onClick={() => {
               set_seat_selected(identifier + (value + 1));
@@ -228,7 +244,11 @@ export function Verticle_Table({
               alignContent: "center",
               justifyItems: "center",
               backgroundColor:
-                seat_selected === identifier + (value + 1) ? "red" : null,
+                seat_selected === identifier + (value + 1)
+                  ? "red"
+                  : filled_seats.some(seat => seat.seat_id === identifier + (value + 1))
+                  ? "lightgreen"
+                  : null,
             }}
             onClick={() => {
               set_seat_selected(identifier + (value + 1));
