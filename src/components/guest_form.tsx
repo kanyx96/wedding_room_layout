@@ -19,13 +19,13 @@ import { Guest } from "@/models/guest_model";
 import { update_guest } from "./functions/update_guest_function";
 
 const Guest_Form = ({ seat_id }: { seat_id: string }) => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [guest, setGuest] = useState<Guest | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchGuest = async () => {
-      setLoading(true)
+      setLoading(true);
       const res = await fetch(
         `/api/guests/fetch_guest_details?seat_id=${seat_id}`
       );
@@ -41,14 +41,29 @@ const Guest_Form = ({ seat_id }: { seat_id: string }) => {
       setFoodChoice(data.food_choice);
       setAllergies(data.allergies);
       setAssociation(data.association);
-      setAssociationGrouping(data.association_grouping)
-      setLoading(false)
+      setAssociationGrouping(data.association_grouping);
+      setLoading(false);
     };
 
     fetchGuest();
   }, [seat_id]);
 
-  const clearAllFields = () => {
+  const clearAllFields = async () => {
+    try {
+      await update_guest(seat_id, null, null, null, null, null);
+      setSnackbarSeverity("success");
+      setSnackbarMessage("Guest information updated successfully!");
+      setSnackbarOpen(true);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setSnackbarMessage(error.message);
+      } else {
+        setSnackbarMessage("An unknown error occurred.");
+      }
+      setSnackbarSeverity("error");
+      setSnackbarOpen(true);
+    }
+
     setGuestName(null);
     setFoodChoice(null);
     setAllergies(null);
@@ -104,10 +119,7 @@ const Guest_Form = ({ seat_id }: { seat_id: string }) => {
         Error: {error}
       </Typography>
     );
-  if (loading || !guest)
-    return (
-      <CircularProgress sx={{ paddingLeft: 3}} />
-    );
+  if (loading || !guest) return <CircularProgress sx={{ paddingLeft: 3 }} />;
 
   return (
     <Box
@@ -140,7 +152,7 @@ const Guest_Form = ({ seat_id }: { seat_id: string }) => {
         sx={{ width: "100%", height: "100%", justifyContent: "center" }}
       >
         <Grid size={12}>
-          <Typography variant="subtitle2">
+          <Typography variant="subtitle2" sx={{ fontSize: "16px" }}>
             Seat Selected: {seat_selected}
           </Typography>
         </Grid>
@@ -152,23 +164,23 @@ const Guest_Form = ({ seat_id }: { seat_id: string }) => {
             value={guestName ?? ""}
             onChange={(e) => setGuestName(e.target.value)}
             slotProps={{
-              inputLabel: { sx: { fontSize: 14 } },
-              input: { sx: { fontSize: 12 } },
+              inputLabel: { sx: { fontSize: 16 } },
+              input: { sx: { fontSize: 14 } },
             }}
             size="medium"
           />
         </Grid>
         <Grid size={12}>
           <FormControl fullWidth size="medium">
-            <InputLabel sx={{ fontSize: 14 }}>Food Choice</InputLabel>
+            <InputLabel sx={{ fontSize: 16 }}>Food Choice</InputLabel>
             <Select
               value={foodChoice ?? ""}
               label="Food Choice"
               onChange={(e) => setFoodChoice(e.target.value)}
               slotProps={{
-                input: { sx: { fontSize: 12 } },
+                input: { sx: { fontSize: 14 } },
               }}
-              sx={{ fontSize: 12 }}
+              sx={{ fontSize: 14 }}
             >
               <MenuItem value="Chicken">Chicken</MenuItem>
               <MenuItem value="Beef">Beef</MenuItem>
@@ -182,15 +194,15 @@ const Guest_Form = ({ seat_id }: { seat_id: string }) => {
             value={allergies ?? ""}
             onChange={(e) => setAllergies(e.target.value)}
             slotProps={{
-              inputLabel: { sx: { fontSize: 14 } },
-              input: { sx: { fontSize: 12 } },
+              inputLabel: { sx: { fontSize: 16 } },
+              input: { sx: { fontSize: 14 } },
             }}
             size="medium"
           />
         </Grid>
         <Grid size={12}>
           <FormControl fullWidth size="medium">
-            <InputLabel sx={{ fontSize: 14 }}>Association</InputLabel>
+            <InputLabel sx={{ fontSize: 16 }}>Association</InputLabel>
             <Select
               value={association ?? ""}
               label="Association"
@@ -198,9 +210,9 @@ const Guest_Form = ({ seat_id }: { seat_id: string }) => {
                 setAssociation(e.target.value as "bride" | "groom")
               }
               slotProps={{
-                input: { sx: { fontSize: 12 } },
+                input: { sx: { fontSize: 14 } },
               }}
-              sx={{ fontSize: 12 }}
+              sx={{ fontSize: 14 }}
             >
               <MenuItem value="bride">Bride</MenuItem>
               <MenuItem value="groom">Groom</MenuItem>
@@ -214,8 +226,8 @@ const Guest_Form = ({ seat_id }: { seat_id: string }) => {
             value={associationGrouping ?? ""}
             onChange={(e) => setAssociationGrouping(e.target.value)}
             slotProps={{
-              inputLabel: { sx: { fontSize: 14 } },
-              input: { sx: { fontSize: 12 } },
+              inputLabel: { sx: { fontSize: 16 } },
+              input: { sx: { fontSize: 14 } },
             }}
             size="medium"
           />
@@ -227,7 +239,7 @@ const Guest_Form = ({ seat_id }: { seat_id: string }) => {
               fullWidth
               onClick={clearAllFields}
               size="medium"
-              sx={{ fontSize: 12, py: 1 }}
+              sx={{ fontSize: 14, py: 1 }}
             >
               Clear guest details
             </Button>
@@ -238,7 +250,7 @@ const Guest_Form = ({ seat_id }: { seat_id: string }) => {
               fullWidth
               onClick={handleUpdateGuest}
               size="medium"
-              sx={{ fontSize: 12, py: 1 }}
+              sx={{ fontSize: 14, py: 1 }}
             >
               Update Details
             </Button>

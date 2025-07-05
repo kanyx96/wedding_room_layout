@@ -9,3 +9,11 @@ export const seat_selected_context = createContext<seat_selected_context_type>({
   seat_selected: null,
   set_seat_selected: () => {},
 });
+
+export type fetchFilledSeatsContextType = {
+  fetchFilledSeats: () => void;
+};
+
+export const filledSeatsContext = createContext<fetchFilledSeatsContextType>({
+  fetchFilledSeats: () => {}
+});
